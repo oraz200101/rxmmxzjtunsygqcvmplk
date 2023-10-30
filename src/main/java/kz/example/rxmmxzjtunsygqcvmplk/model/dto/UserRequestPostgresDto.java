@@ -1,13 +1,16 @@
 package kz.example.rxmmxzjtunsygqcvmplk.model.dto;
 
+
+
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+
 @Getter
 @Setter
-public class UserPostMongoDto {
-    private String id;
+public class UserRequestPostgresDto {
+    private Long id;
     private String name;
     private LocalDate dateOfBirth;
     private String firstPhoneNumber;

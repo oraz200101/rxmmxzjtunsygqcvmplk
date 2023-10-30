@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table(name = "users", schema = "phone_number_crud")
+@Table(name = "users", schema = "phone_number_crud_schema")
 public class UserPostgres {
 
     @Column(name = "id")

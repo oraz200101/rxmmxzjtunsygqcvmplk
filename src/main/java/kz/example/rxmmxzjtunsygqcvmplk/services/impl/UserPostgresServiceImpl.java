@@ -4,7 +4,7 @@ import kz.example.rxmmxzjtunsygqcvmplk.exception.NotFoundException;
 import kz.example.rxmmxzjtunsygqcvmplk.mapper.UserMapper;
 import kz.example.rxmmxzjtunsygqcvmplk.model.dto.Filter;
 import kz.example.rxmmxzjtunsygqcvmplk.model.dto.UserGetPostgresDto;
-import kz.example.rxmmxzjtunsygqcvmplk.model.dto.UserPostPostgresDto;
+import kz.example.rxmmxzjtunsygqcvmplk.model.dto.UserRequestPostgresDto;
 import kz.example.rxmmxzjtunsygqcvmplk.model.entities.UserPostgres;
 import kz.example.rxmmxzjtunsygqcvmplk.repositories.UserPostgresRepository;
 import kz.example.rxmmxzjtunsygqcvmplk.services.UserPostgresService;
@@ -24,18 +24,18 @@ public class UserPostgresServiceImpl implements UserPostgresService {
 
     @Override
     @Transactional
-    public UserGetPostgresDto createUser(UserPostPostgresDto userPostDto) {
-        UserPostgres userPostgres = mapper.mapToUserPostgresEntity(userPostDto);
+    public UserGetPostgresDto createUser(UserRequestPostgresDto userRequestPostgresDto) {
+        UserPostgres userPostgres = mapper.mapToUserPostgresEntity(userRequestPostgresDto);
         repository.save(userPostgres);
         return mapper.mapToUserPostgresDto(userPostgres);
     }
 
     @Override
     @Transactional
-    public UserGetPostgresDto updateUser(UserPostPostgresDto userPostDto) {
-        UserPostgres userPostgres = repository.findById(userPostDto.getId())
-                .orElseThrow(()->new NotFoundException("user with id: " +userPostDto.getId() +" not found"));
-        userPostgres = mapper.mapToUserPostgresEntity(userPostgres, userPostDto);
+    public UserGetPostgresDto updateUser(UserRequestPostgresDto userRequestPostgresDto) {
+        UserPostgres userPostgres = repository.findById(userRequestPostgresDto.getId())
+                .orElseThrow(() -> new NotFoundException("user with id: " + userRequestPostgresDto.getId() + " not found"));
+        userPostgres = mapper.mapToUserPostgresEntity(userPostgres, userRequestPostgresDto);
         repository.save(userPostgres);
         return mapper.mapToUserPostgresDto(userPostgres);
     }
@@ -43,14 +43,14 @@ public class UserPostgresServiceImpl implements UserPostgresService {
     @Override
     public UserGetPostgresDto getById(Long id) {
         UserPostgres userPostgres = repository.findById(id)
-                .orElseThrow(()->new NotFoundException("user with id: " +id +" not found"));
+                .orElseThrow(() -> new NotFoundException("user with id: " + id + " not found"));
         return mapper.mapToUserPostgresDto(userPostgres);
     }
 
     @Override
     public UserGetPostgresDto getByPhoneNumber(String phoneNumber) {
         UserPostgres userPostgres = repository.findByFirstPhoneNumberOrSecondPhoneNumber(phoneNumber)
-                .orElseThrow(()->new NotFoundException("user with phone number: " + phoneNumber + " not found"));
+                .orElseThrow(() -> new NotFoundException("user with phone number: " + phoneNumber + " not found"));
         return mapper.mapToUserPostgresDto(userPostgres);
     }
 
@@ -64,6 +64,10 @@ public class UserPostgresServiceImpl implements UserPostgresService {
     @Override
     @Transactional
     public void deleteById(Long id) {
-         repository.deleteById(id);
+        if (!repository.existsById(id)) {
+            throw new NotFoundException("user with id: " + id + " not found");
+        } else {
+            repository.deleteById(id);
+        }
     }
 }

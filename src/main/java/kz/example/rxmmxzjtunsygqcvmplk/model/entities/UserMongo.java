@@ -1,11 +1,13 @@
 package kz.example.rxmmxzjtunsygqcvmplk.model.entities;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
@@ -23,7 +25,7 @@ public class UserMongo {
     private LocalDate dateOfBirth;
     private String firstPhoneNumber;
     private String secondPhoneNumber;
-    @CreationTimestamp
+    @CreatedDate
     private LocalDateTime createDateTime;
 
 

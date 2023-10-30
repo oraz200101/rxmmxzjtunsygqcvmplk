@@ -4,9 +4,9 @@ import kz.example.rxmmxzjtunsygqcvmplk.model.dto.*;
 import org.springframework.data.domain.Page;
 
 public interface UserMongoService {
-    UserGetMongoDto createUser(UserPostMongoDto userPostDto);
+    UserGetMongoDto createUser(UserRequestMongoDto userPostDto);
 
-    UserGetMongoDto updateUser(UserPostMongoDto userPostDto);
+    UserGetMongoDto updateUser(UserRequestMongoDto userPostDto);
 
     UserGetMongoDto getById(String id);
 

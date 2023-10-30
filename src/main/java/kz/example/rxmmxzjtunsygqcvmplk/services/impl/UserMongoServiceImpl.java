@@ -4,7 +4,7 @@ import kz.example.rxmmxzjtunsygqcvmplk.exception.NotFoundException;
 import kz.example.rxmmxzjtunsygqcvmplk.mapper.UserMapper;
 import kz.example.rxmmxzjtunsygqcvmplk.model.dto.Filter;
 import kz.example.rxmmxzjtunsygqcvmplk.model.dto.UserGetMongoDto;
-import kz.example.rxmmxzjtunsygqcvmplk.model.dto.UserPostMongoDto;
+import kz.example.rxmmxzjtunsygqcvmplk.model.dto.UserRequestMongoDto;
 import kz.example.rxmmxzjtunsygqcvmplk.model.entities.UserMongo;
 import kz.example.rxmmxzjtunsygqcvmplk.repositories.mongo.UserMongoRepository;
 import kz.example.rxmmxzjtunsygqcvmplk.services.UserMongoService;
@@ -24,18 +24,18 @@ public class UserMongoServiceImpl implements UserMongoService {
 
     @Override
     @Transactional
-    public UserGetMongoDto createUser(UserPostMongoDto userPostDto) {
-        UserMongo userMongo = mapper.mapToUserMongoEntity(userPostDto);
+    public UserGetMongoDto createUser(UserRequestMongoDto userRequestMongoDto) {
+        UserMongo userMongo = mapper.mapToUserMongoEntity(userRequestMongoDto);
         repository.save(userMongo);
         return mapper.mapToUserMongoDto(userMongo);
     }
 
     @Override
     @Transactional
-    public UserGetMongoDto updateUser(UserPostMongoDto userPostDto) {
-        UserMongo userMongo = repository.findById(userPostDto.getId())
-                .orElseThrow(() -> new NotFoundException("user with id: " + userPostDto.getId() + " not found"));
-        userMongo = mapper.mapToUserMongoEntity(userMongo, userPostDto);
+    public UserGetMongoDto updateUser(UserRequestMongoDto userRequestMongoDto) {
+        UserMongo userMongo = repository.findById(userRequestMongoDto.getId())
+                .orElseThrow(() -> new NotFoundException("user with id: " + userRequestMongoDto.getId() + " not found"));
+        userMongo = mapper.mapToUserMongoEntity(userMongo, userRequestMongoDto);
         repository.save(userMongo);
         return mapper.mapToUserMongoDto(userMongo);
     }
@@ -43,14 +43,15 @@ public class UserMongoServiceImpl implements UserMongoService {
     @Override
     public UserGetMongoDto getById(String id) {
         UserMongo userMongo = repository.findById(id)
-                .orElseThrow(() -> new NotFoundException("user with id: " +id+ " not found"));
+                .orElseThrow(() -> new NotFoundException("user with id: " + id + " not found"));
         return mapper.mapToUserMongoDto(userMongo);
     }
 
     @Override
     public UserGetMongoDto getByPhoneNumber(String phoneNumber) {
         UserMongo userMongo = repository.findByPhoneNumber(phoneNumber)
-                .orElseThrow(()->new NotFoundException("user with phone number: " +phoneNumber+ " not found"));;
+                .orElseThrow(() -> new NotFoundException("user with phone number: " + phoneNumber + " not found"));
+        ;
         return mapper.mapToUserMongoDto(userMongo);
     }
 
@@ -63,6 +64,10 @@ public class UserMongoServiceImpl implements UserMongoService {
     @Override
     @Transactional
     public void deleteById(String id) {
-       repository.deleteById(id);
+        if (!repository.existsById(id)) {
+            throw new NotFoundException("user with id: " + id + " not found");
+        } else {
+            repository.deleteById(id);
+        }
     }
 }

@@ -16,4 +16,6 @@ spring:
     url: jdbc:postgresql://${DATABASE_HOST:localhost}:${DATABASE_PORT:5432}/${DATABASE_NAME:postgres}
     username: ${DATABASE_USER:postgres}
     password: ${DATABASE_PASSWORD:0000}
-
+server:
+  servlet:
+    contextPath: ${ROOT_URL:/api}

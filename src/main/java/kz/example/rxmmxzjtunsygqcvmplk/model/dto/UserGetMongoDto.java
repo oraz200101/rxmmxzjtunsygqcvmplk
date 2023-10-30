@@ -14,5 +14,5 @@ public class UserGetMongoDto {
     private LocalDate dateOfBirth;
     private String firstPhoneNumber;
     private String secondPhoneNumber;
-    private LocalDateTime dateTimeCreate;
+    private LocalDateTime createDateTime;
 }
