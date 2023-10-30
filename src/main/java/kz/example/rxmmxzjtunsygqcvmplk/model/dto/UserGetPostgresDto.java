@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 public class UserGetPostgresDto {
@@ -12,4 +14,5 @@ public class UserGetPostgresDto {
     private LocalDate dateOfBirth;
     private String firstPhoneNumber;
     private String secondPhoneNumber;
+    private LocalDateTime dateTimeCreate;
 }
