@@ -1,24 +1,26 @@
-package kz.example.rxmmxzjtunsygqcvmplk.model.entities.mongo;
+package kz.example.rxmmxzjtunsygqcvmplk.model.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-@Document(collection = "users")
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class User {
+@Table(name = "users", schema = "phone_number_crud")
+public class UserPostgres {
+
+    @Column(name = "id")
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -35,4 +37,5 @@ public class User {
     @Column(name = "create_date_time")
     @CreationTimestamp
     private LocalDateTime createDateTime;
+
 }

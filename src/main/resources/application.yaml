@@ -6,6 +6,7 @@ spring:
       host: ${MONGO_HOST:localhost}
   flyway:
     baseline-on-migrate: true
+    schemas: phone_number_crud_schema
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
