@@ -19,3 +19,7 @@ spring:
 server:
   servlet:
     contextPath: ${ROOT_URL:/api}
+springdoc:
+  version: '@springdoc.version@'
+  swagger-ui:
+    use-root-path: true
