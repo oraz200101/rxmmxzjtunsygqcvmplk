@@ -9,15 +9,15 @@
 # 2 INSTALLATION
   
   2.1 VERSION 1
-  # Install JDK 17, MongoDb 7.0.0, PostgreSql 15 and last version of gradle
-  # Clone project with command: git clone https://github.com/oraz200101/rxmmxzjtunsygqcvmplk.git
-  # Set datasource properties to databases in 'src/main/resources/application.yaml'
-  # Open terminal with folder of project and use command ./gradlew bootRun or (If you have IntelliJ Idea you can run with main class)
+   Install JDK 17, MongoDb 7.0.0, PostgreSql 15 and last version of gradle
+   Clone project with command: git clone https://github.com/oraz200101/rxmmxzjtunsygqcvmplk.git
+   Set datasource properties to databases in 'src/main/resources/application.yaml'
+   Open terminal with folder of project and use command ./gradlew bootRun or (If you have IntelliJ Idea you can run with main class)
   
   2.2 VERSION 2
-  # Install JDK 17, gradle 
-  # Open terminal with folder of project and use command ./gradlew build
-  # Use command docker-compose build after that use docker-compose up
+   Install JDK 17, gradle 
+   Open terminal with folder of project and use command ./gradlew build
+   Use command docker-compose build after that use docker-compose up
 
 # 3 USE
   3.1 Open Postman and import collection form 'src/main/resources/requests/PhoneCollection.postman_collection.json'
