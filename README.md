@@ -21,6 +21,7 @@
 
 # 3 USE
   3.1 Open Postman and import collection form 'src/main/resources/requests/PhoneCollection.postman_collection.json'
+  3.2 Look swagger documentation with address http://localhost:8080/api/swagger-ui/index.html
   3.2 Send requests and get responses
   
   
